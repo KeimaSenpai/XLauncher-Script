@@ -1,5 +1,3 @@
-![minecraft_title](https://github.com/KeimaSenpai/X-Launcher/assets/98184310/7add7162-ec81-45a9-bf23-d182655b655f)
-
 # Minecraft Launcher
 Launcher de minecraft que hice para un video de YouTube
 

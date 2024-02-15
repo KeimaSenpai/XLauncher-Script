@@ -28,7 +28,8 @@ python -m pip install -r requirements.txt --index-url http://nexus.prod.uci.cu/r
 pyinstaller main.py --noconfirm --onedir --console --icon icon_windows.ico --name "XLauncher"
 ```
 
->Link de la documentacion [LINK](https://minecraft-launcher-lib.readthedocs.io/en/stable/)
+> Link de la documentacion [LINK](https://minecraft-launcher-lib.readthedocs.io/en/stable/)
 
 ## 📺Video de YouTube
+> Recuerda dejar Like y no dejes de suscribirte al canal 👍
 [CREA TU PROPIO LAUNCHER de MINECRAFT](https://youtu.be/5FmjSubDRyw?si=9brYY9OnENftZgft)

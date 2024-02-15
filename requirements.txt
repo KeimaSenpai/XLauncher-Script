@@ -1,0 +1,13 @@
+altgraph==0.17.4
+certifi==2024.2.2
+charset-normalizer==3.3.2
+idna==3.6
+minecraft-launcher-lib==6.4
+packaging==23.2
+pefile==2023.2.7
+pillow==10.2.0
+pyinstaller==6.4.0
+pyinstaller-hooks-contrib==2024.1
+pywin32-ctypes==0.2.2
+requests==2.31.0
+urllib3==2.2.0

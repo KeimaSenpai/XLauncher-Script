@@ -1,10 +1,10 @@
 import asyncio
 import os
 # Importaciones locales
-from minecraft_launcher.minecraft import install_forge, install_minecraft, play_mine
+from minecraft_launcher.minecraft import install_fabric, install_forge, install_minecraft, play_mine
 
 
-VERSION = ('1.0.0 (Beta)')
+VERSION = ('1.0.1')
 user_windows = os.environ['USERNAME']
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
 
@@ -24,7 +24,8 @@ async def menu():
 ▐Play Minecraft (1)
 ▐Instalar Versiones (2)
 ▐Instalar Forge (3)
-▐Para info de del script (4)
+▐Instalar Fabric (4)
+▐Para info de del script (5)
 ▐Si quiere salir escriba (0)
 ''')
 
@@ -36,6 +37,8 @@ async def menu():
     if select == "3":
         await install_forge()
     if select == "4":
+        await install_fabric()
+    if select == "5":
         await info_app()
     if select == "0":
         exit
@@ -51,9 +54,11 @@ async def info_app():
 »Simple scipt par ejecutar Minecraft
  y jugar de manera no premium.
 
-»Desarrollado por KeimaSenpai.
+» Desarrollado por KeimaSenpai.
+
 »Telegram - https://t.me/KeimaSenpai
 »YouTube - https://www.youtube.com/@KeimaSenpaiYT
+»GitHub - https://github.com/KeimaSenpai/XLauncher-Script
 »Version: {VERSION}\n
 ''')
     print('Escribe (0) para volver')

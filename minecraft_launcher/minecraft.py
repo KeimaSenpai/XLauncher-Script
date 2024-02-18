@@ -2,16 +2,39 @@ import minecraft_launcher_lib
 import os
 import subprocess
 
-
 user_windows = os.environ['USERNAME']
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
+
+
+# Indicador de por donde va la instalación
+current_max = 0
+
+def set_status(status: str):
+    print(status)
+
+
+def set_progress(progress: int):
+    if current_max != 0:
+        print(f"{progress}/{current_max}")
+
+
+def set_max(new_max: int):
+    global current_max
+    current_max = new_max
+
+callback = {
+    "setStatus": set_status,
+    "setProgress": set_progress,
+    "setMax": set_max
+}
+
 
 
 # Insalación de Minecraft
 async def install_minecraft():
     minecraft_version = input('Versió: ')
     minecraft_launcher_lib.install.install_minecraft_version(
-        minecraft_version, minecraft_directory)
+        minecraft_version, minecraft_directory, callback=callback)
     print(f'» Instalada la version {minecraft_version}')
 
 
@@ -22,9 +45,18 @@ async def install_forge():
     forfe = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
     print(forfe)
     minecraft_launcher_lib.forge.install_forge_version(
-        forfe, minecraft_directory)
+        forfe, minecraft_directory, callback=callback)
     print(f'Instalado Forge {forfe}')
 
+async def install_fabric():
+    print('Dime la versión')
+    fabric_ver = input('» ')
+    fabric_supor_ver = minecraft_launcher_lib.fabric.is_minecraft_version_supported(fabric_ver)
+    if fabric_supor_ver == False:
+        print('No es compatible esa versión')
+        await install_fabric()
+    else:
+        fabric = minecraft_launcher_lib.fabric.install_fabric(fabric_ver, minecraft_directory, callback=callback)
 
 async def play_mine():
     print('Dígame su nombre')

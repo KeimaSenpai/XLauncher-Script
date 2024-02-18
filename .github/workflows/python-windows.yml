@@ -24,17 +24,20 @@ jobs:
     - name: Compress folder
       shell: powershell
       run: |
-        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher.zip
+        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-Windows.zip
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: v1.0.0
-        release_name: XLauncher v1.0.0
+        tag_name: v1.0.1
+        release_name: XLauncher v1.0.1
         body: |
-          This is the first release.
+          - Agregado indicador de por donde va la descarga.
+          - Agregada la opcion de instalar Fabric
+          
+          - Proximamente login con cuenta Premium
         draft: false
         prerelease: false
     - name: Upload Release Asset
@@ -44,6 +47,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./XLauncher.zip
-        asset_name: XLauncher.zip
+        asset_path: ./XLauncher-Windows.zip
+        asset_name: XLauncher-Windows.zip
         asset_content_type: application/zip

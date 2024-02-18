@@ -1,4 +1,5 @@
 # Minecraft Launcher
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KeimaSenpai/XLauncher-Script/total?style=for-the-badge&label=Download&color=%23756AB6)
 Launcher de minecraft que hice para un video de YouTube
 
 ### 🔩Instalacion

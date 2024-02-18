@@ -8,7 +8,7 @@ minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
 
 
 # Insalación de Minecraft
-def install_minecraft():
+async def install_minecraft():
     minecraft_version = input('Versió: ')
     minecraft_launcher_lib.install.install_minecraft_version(
         minecraft_version, minecraft_directory)
@@ -16,7 +16,7 @@ def install_minecraft():
 
 
 # Instalar Forge
-def install_forge():
+async def install_forge():
     print('Dime la Versión')
     forge_ver = input('» ')
     forfe = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
@@ -26,7 +26,7 @@ def install_forge():
     print(f'Instalado Forge {forfe}')
 
 
-def play_mine(mine_user):
+async def play_mine():
     print('Dígame su nombre')
     mine_user = input('» ')
     forts = minecraft_launcher_lib.utils.get_installed_versions(

@@ -1,0 +1,6 @@
+*.pyc
+*.gz
+*.pyc
+textures_0.png
+__pycache__
+minecraft.cpython-311.pyc

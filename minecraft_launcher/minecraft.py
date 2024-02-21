@@ -1,8 +1,10 @@
-import minecraft_launcher_lib
 import os
+import json
 import subprocess
+import minecraft_launcher_lib
 
 user_windows = os.environ['USERNAME']
+ruta_json = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher//configuracion.json"
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
 
 
@@ -59,10 +61,15 @@ async def install_fabric():
         fabric = minecraft_launcher_lib.fabric.install_fabric(fabric_ver, minecraft_directory, callback=callback)
 
 async def play_mine():
-    print('Dígame su nombre')
-    mine_user = input('» ')
-    forts = minecraft_launcher_lib.utils.get_installed_versions(
-        minecraft_directory)
+    with open(ruta_json, 'r') as file:
+        data = json.load(file)
+
+    if 'Nombre' in data and 'RAM' in data:
+        mine_user = data['Nombre']
+        ram = data['RAM']
+        java_ruta = data.get('Java', None)
+
+    forts = minecraft_launcher_lib.utils.get_installed_versions(minecraft_directory)
     for fort in forts:
         print(fort['id'])
     print('Diagem la versión')
@@ -72,10 +79,12 @@ async def play_mine():
         'username': mine_user,
         'uuid': '',
         'token': '',
+        'executablePath':f'{java_ruta}',
+        'defaultExecutablePath':f'{java_ruta}',
 
         "jvmArguments": [
-            "-Xmx2G",
-            "-Xms2G",
+            f"-Xmx{ram}M",
+            f"-Xms{ram}M",
             "-Xmn668m",
             "-XX:+DisableExplicitGC",
             "-XX:+UseConcMarkSweepGC",
@@ -102,10 +111,12 @@ async def play_mine():
             "-XX:SoftRefLRUPolicyMSPerMB=10000",
             "-XX:ParallelGCThreads=10"
             ],  # The jvmArguments
-        "launcherVersion": "1.0.0",
+        "launcherVersion": "1.0.2",
     }
 
     # Ejecutar Minecraft
     minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(
         version, minecraft_directory, options)
     subprocess.run(minecraft_command)
+
+    

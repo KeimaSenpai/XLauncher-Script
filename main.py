@@ -1,7 +1,7 @@
 import asyncio
 import os
 import json
-import time sleep
+import time
 # Importaciones locales
 from minecraft_launcher.minecraft import install_fabric, install_forge, install_minecraft, play_mine
 
@@ -73,8 +73,8 @@ async def confi():
 
     with open(ruta_json, 'w') as file:
         json.dump(data, file)
+    print("◈ Guardando... ◈")
     time.sleep(2)
-    print("◈ Valores guardados ◈")
     await menu()
 
 # Esto es para cambiar los ajustes
@@ -95,7 +95,7 @@ async def cambiar_dato():
         with open(ruta_json, 'w') as file:
             json.dump(data, file)
 
-        print(f"El valor ha sido actualizado")
+        print(f"◈ Actualizando... ◈")
         time.sleep(2)
         await menu()
     else:

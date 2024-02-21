@@ -8,8 +8,8 @@ from minecraft_launcher.minecraft import install_fabric, install_forge, install_
 
 VERSION = ('1.0.2')
 user_windows = os.environ['USERNAME']
-ruta_json = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher//configuracion.json"
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
+ruta_json = f"{minecraft_directory}//configuracion.json"
 
 async def menu():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -60,7 +60,7 @@ async def menu():
 async def confi():
     print('▐Digame su Nombre')
     nombre = input('» ')
-    print('▐Digame la RAM en MB')
+    print('▐Digame la RAM en GB')
     ram = input('» ')
     print('▐Digame la ruta del Java')
     java_ruta = input('» ')

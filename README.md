@@ -34,3 +34,6 @@ pyinstaller main.py --noconfirm --onedir --console --icon icon_windows.ico --nam
 ## 📺Video de YouTube
 > Recuerda dejar Like y no dejes de suscribirte al canal 👍
 [CREA TU PROPIO LAUNCHER de MINECRAFT](https://youtu.be/5FmjSubDRyw?si=9brYY9OnENftZgft)
+
+## Gracias a todos los que estan contribuyendo con el proyecto
+[![Contribuidores](https://contrib.rocks/image?repo=KeimaSenpai/XLauncher-Script)](https://github.com/KeimaSenpai/XLauncher-Script/graphs/contributors)

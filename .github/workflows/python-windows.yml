@@ -34,7 +34,6 @@ jobs:
         tag_name: v1.0.2
         release_name: XLauncher v1.0.2
         body: |
-          ## XLauncher
           - Agregado indicador de por donde va la descarga.
           - Agregada la opcion de instalar Fabric.
           - Agregado las opcion de Ajustes.
@@ -42,8 +41,9 @@ jobs:
           ------
           - Proximamente login con cuenta Premium
           - Version Linux y Mac
+          ![GitHub Release](https://img.shields.io/github/v/release/KeimaSenpai/XLauncher-Script?style=for-the-badge&label=Versi%C3%B3n&labelColor=%236f7357&color=%239e6788)
+          ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/KeimaSenpai/XLauncher-Script/latest/total?style=for-the-badge&label=Downloads&labelColor=%23394651&color=%23675988)
           
-          >
         draft: false
         prerelease: false
     - name: Upload Release Asset

@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    env:
+      version: 1.0.3
+      plataforma: Windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,15 +27,15 @@ jobs:
     - name: Compress folder
       shell: powershell
       run: |
-        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-Windows.zip
+        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-${{ env.plataforma }}.zip
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: v1.0.2
-        release_name: XLauncher v1.0.2
+        tag_name: ${{ env.version }}
+        release_name: XLauncher ${{ env.version }}
         body: |
           - Agregado indicador de por donde va la descarga.
           - Agregada la opcion de instalar Fabric.
@@ -53,6 +56,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./XLauncher-Windows.zip
-        asset_name: XLauncher-Windows.zip
+        asset_path: ./XLauncher-${{ env.plataforma }}.zip
+        asset_name: XLauncher-${{ env.plataforma }}.zip
         asset_content_type: application/zip

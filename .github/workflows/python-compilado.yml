@@ -59,12 +59,38 @@ jobs:
     - name: Build with pyinstaller
       run: |
         pyinstaller main.py --onefile --icon icon_windows.ico --name "XLauncher"
-    - name: Compress folder
-      run: |
-        zip XLauncher-Ubuntu.zip dist/XLauncher
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.name }}-ubuntu
+        path: ./dist
+
+#Compilar MACOS
+
+  build-macos:
+    runs-on: macos-latest
+    env:
+      name: XLauncher
+      version: 1.0.3
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python 3.11.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build with pyinstaller
+      run: |
+        pyinstaller main.py --onefile --icon icon_windows.ico --name "XLauncher"
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.name }}-macos
         path: ./dist

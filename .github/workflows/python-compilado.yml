@@ -7,7 +7,7 @@ on:
 
 # Compilar a Windows
 jobs:
-  build:
+  build-windows:
     env:
       name: XLauncher
       version: 1.0.3
@@ -37,11 +37,13 @@ jobs:
         name: ${{ env.name }}-Windows
         path: ./dist
 
-# Compilar a Ubuntu 
+# Compilar a Ubuntu
 
-  release:
-    needs: build
+  build-ubuntu:
     runs-on: ubuntu-latest
+    env:
+      name: XLauncher
+      version: 1.0.3
 
     steps:
     - uses: actions/checkout@v2
@@ -64,5 +66,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.name }}-${{ env.plataforma }}
+        name: ${{ env.name }}-ubuntu
         path: ./dist

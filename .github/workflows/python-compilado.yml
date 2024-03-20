@@ -87,7 +87,7 @@ jobs:
         pip install -r requirements.txt
     - name: Build with pyinstaller
       run: |
-        pyinstaller main.py --onefile --icon icon_windows.ico --name "XLauncher"
+        python setup.py py2app
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2

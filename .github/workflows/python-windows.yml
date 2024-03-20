@@ -37,7 +37,7 @@ jobs:
         name: ${{ env.name }}-Windows
         path: ./dist
 
-# Division de publicar
+# Compilar a Ubuntu 
 
   release:
     needs: build
@@ -58,9 +58,8 @@ jobs:
       run: |
         pyinstaller main.py --noconfirm --onedir --console --icon icon_windows.ico --name "XLauncher"
     - name: Compress folder
-      shell: powershell
       run: |
-        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-Ubuntu.zip
+        zip XLauncher-Ubuntu.zip dist/XLauncher
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2

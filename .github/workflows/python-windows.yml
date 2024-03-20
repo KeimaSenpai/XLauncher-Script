@@ -7,9 +7,13 @@ on:
 
 jobs:
   build:
+    env:
+      version: 1.0.3
+      plataforma: Windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    
     - name: Set up Python 3.11.6
       uses: actions/setup-python@v2
       with:
@@ -24,35 +28,50 @@ jobs:
     - name: Compress folder
       shell: powershell
       run: |
-        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-Windows.zip
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-${{ env.plataforma }}.zip
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
       with:
-        tag_name: v1.0.2
-        release_name: XLauncher v1.0.2
-        body: |
-          ## XLauncher
-          - Agregado indicador de por donde va la descarga.
-          - Agregada la opcion de instalar Fabric.
-          - Agregado las opcion de Ajustes.
-          - Editar Nombre ruta del Java y RAM.
-          ------
-          - Proximamente login con cuenta Premium
-          - Version Linux y Mac
-          
-          >
-        draft: false
-        prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./XLauncher-Windows.zip
-        asset_name: XLauncher-Windows.zip
-        asset_content_type: application/zip
+        name: my-artifacts
+        path: ./dist
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: ${{ env.version }}
+          release_name: XLauncher ${{ env.version }}
+          body: |
+            - Agregado indicador de por donde va la descarga.
+            - Agregada la opcion de instalar Fabric.
+            - Agregado las opcion de Ajustes.
+            - Editar Nombre ruta del Java y RAM.
+            ------
+            - Proximamente login con cuenta Premium
+            - Version Linux y Mac
+            ![GitHub Release](https://img.shields.io/github/v/release/KeimaSenpai/XLauncher-Script?style=for-the-badge&label=Versi%C3%B3n&labelColor=%236f7357&color=%239e6788)
+            ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/KeimaSenpai/XLauncher-Script/latest/total?style=for-the-badge&label=Downloads&labelColor=%23394651&color=%23675988)
+            
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./XLauncher-${{ env.plataforma }}.zip
+          asset_name: XLauncher-${{ env.plataforma }}.zip
+          asset_content_type: application/zip

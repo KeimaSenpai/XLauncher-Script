@@ -11,3 +11,4 @@ pyinstaller-hooks-contrib
 pywin32-ctypes
 requests
 urllib3
+py2app

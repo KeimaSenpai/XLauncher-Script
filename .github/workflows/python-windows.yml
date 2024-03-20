@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+# Compilar a Windows
 jobs:
   build:
     env:
@@ -36,6 +37,8 @@ jobs:
       with:
         name: ${{ env.name }}
         path: ./dist
+
+# Division de publicar
 
   release:
     needs: build
@@ -73,6 +76,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/XLauncher-${{ env.plataforma }}.zip
-          asset_name: XLauncher-${{ env.plataforma }}.zip
+          asset_path: ./dist/${{ env.name }}
+          asset_name: ${{ env.name }}
           asset_content_type: application/octet-stream

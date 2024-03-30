@@ -6,7 +6,7 @@ import time
 from minecraft_launcher.minecraft import install_fabric, install_forge, install_minecraft, play_mine
 
 
-VERSION = ('1.0.2')
+VERSION = ('1.0.3')
 user_windows = os.environ['USERNAME']
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
 ruta_json = f"{minecraft_directory}//configuracion.json"

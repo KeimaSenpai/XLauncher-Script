@@ -34,17 +34,21 @@ jobs:
         tag_name: v1.0.3
         release_name: XLauncher v1.0.3
         body: |
-          ## XLauncher
+          ## 🚀 Funciones
           - Agregado indicador de por donde va la descarga.
           - Agregada la opcion de instalar Fabric.
           - Agregado las opcion de Ajustes.
           - Editar Nombre ruta del Java y RAM.
           ------
-          - Proximamente login con cuenta Premium
+          ## 📑Próximamente
+          -  Login con cuenta Premium
           - Versiones para Linux y MACOS
           ------
-          > Los siguientes bugs se arreglaron.
-          - 'UseConcMarkSweepGC'
+          ## 🐛Se corrigieron los siguientes bugs
+          
+          - [ ]  'UseConcMarkSweepGC'
+          
+          ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KeimaSenpai/XLauncher-Script/total?style=for-the-badge&label=Download&color=%23756AB6)
         draft: false
         prerelease: false
     - name: Upload Release Asset

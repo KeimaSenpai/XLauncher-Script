@@ -5,16 +5,11 @@ on:
     branches:
       - main
 
-# Compilar a Windows
 jobs:
-  build-windows:
-    env:
-      name: XLauncher
-      version: 1.0.3
+  build:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    
     - name: Set up Python 3.11.6
       uses: actions/setup-python@v2
       with:
@@ -30,67 +25,35 @@ jobs:
       shell: powershell
       run: |
         Compress-Archive -Path dist/XLauncher -DestinationPath XLauncher-Windows.zip
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        name: ${{ env.name }}-Windows
-        path: ./dist
-
-# Compilar a Ubuntu
-
-  build-ubuntu:
-    runs-on: ubuntu-latest
-    env:
-      name: XLauncher
-      version: 1.0.3
-
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python 3.11.6
-      uses: actions/setup-python@v2
+        tag_name: v1.0.3
+        release_name: XLauncher v1.0.3
+        body: |
+          ## XLauncher
+          - Agregado indicador de por donde va la descarga.
+          - Agregada la opcion de instalar Fabric.
+          - Agregado las opcion de Ajustes.
+          - Editar Nombre ruta del Java y RAM.
+          ------
+          - Proximamente login con cuenta Premium
+          - Versiones para Linux y MACOS
+          ------
+          > Los siguientes bugs se arreglaron.
+          - 'UseConcMarkSweepGC'
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        python-version: 3.11.6
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Build with pyinstaller
-      run: |
-        pyinstaller main.py --onefile --icon icon_windows.ico --name "XLauncher"
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.name }}-ubuntu
-        path: ./dist
-
-#Compilar MACOS
-
-  build-macos:
-    runs-on: macos-latest
-    env:
-      name: XLauncher
-      version: 1.0.3
-
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python 3.11.6
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.11.6
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Build with pyinstaller
-      run: |
-        pyinstaller main.py --onefile --icon icon_windows.ico --name "XLauncher"
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.name }}-macos
-        path: ./dist
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./XLauncher-Windows.zip
+        asset_name: XLauncher-Windows.zip
+        asset_content_type: application/zip

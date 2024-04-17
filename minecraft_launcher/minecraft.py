@@ -6,7 +6,7 @@ import minecraft_launcher_lib
 
 user_windows = os.environ['USERNAME']
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
-ruta_json = f"{minecraft_directory}//configuracion.json"
+ruta_json = f"{minecraft_directory}//configuration.json"
 
 
 # Indicador de por donde va la instalación
@@ -32,12 +32,10 @@ callback = {
 }
 
 
-
-# Insalación de Minecraft
+# Instalación de Minecraft
 async def install_minecraft():
-    minecraft_version = input('Versió: ')
-    minecraft_launcher_lib.install.install_minecraft_version(
-        minecraft_version, minecraft_directory, callback=callback)
+    minecraft_version = input('Versión: ')
+    minecraft_launcher_lib.install.install_minecraft_version(minecraft_version, minecraft_directory, callback=callback) # type: ignore
     print(f'» Instalada la version {minecraft_version}')
 
 
@@ -45,10 +43,9 @@ async def install_minecraft():
 async def install_forge():
     print('Dime la Versión')
     forge_ver = input('» ')
-    forfe = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
-    print(forfe)
-    minecraft_launcher_lib.forge.install_forge_version(
-        forfe, minecraft_directory, callback=callback)
+    forge = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
+    print(forge)
+    minecraft_launcher_lib.forge.install_forge_version(forge, minecraft_directory, callback=callback) # type: ignore
     print("◈ Forge Instalado... ◈")
     time.sleep(2)
     await play_mine()
@@ -61,7 +58,7 @@ async def install_fabric():
         print('No es compatible esa versión')
         await install_fabric()
     else:
-        fabric = minecraft_launcher_lib.fabric.install_fabric(fabric_ver, minecraft_directory, callback=callback)
+        fabric = minecraft_launcher_lib.fabric.install_fabric(fabric_ver, minecraft_directory, callback=callback) # type: ignore
         print("◈ Fabric Instalado... ◈")
         time.sleep(2)
         await play_mine()
@@ -71,36 +68,25 @@ async def play_mine():
     with open(ruta_json, 'r') as file:
         data = json.load(file)
 
-    if 'Nombre' in data and 'RAM' in data:
+    if 'Nombre' in data and 'RAM' in data and 'Version' in data:
         mine_user = data['Nombre']
         ram = data['RAM']
+        version = data['Version']
         java_ruta = data.get('Java', None)
-
-    print('▨ Versiones Instaladas ▨')
-    forts = minecraft_launcher_lib.utils.get_installed_versions(minecraft_directory)
-    for fort in forts:
-        print(fort['id'])
-    print('\n▐Digame la versión')
-    version = input('» ')
 
     options = {
         'username': mine_user,
         'uuid': '',
         'token': '',
         'executablePath':f'{java_ruta}',
-        'defaultExecutablePath':f'{java_ruta}',
 
         "jvmArguments": [
             f"-Xmx{ram}G",
             f"-Xms{ram}G",
             ],  # The jvmArguments
-        "launcherVersion": "1.0.3",
+        "launcherVersion": "1.0.4",
     }
 
     # Ejecutar Minecraft
-    minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(
-        version, minecraft_directory, options)
+    minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(version, minecraft_directory, options) # type: ignore
     subprocess.run(minecraft_command)
-    await play_mine()
-
-    

@@ -1,3 +1,9 @@
 {
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "cSpell.language": "en,es,es-ES",
+    "cSpell.words": [
+        "confi",
+        "supor"
+    ]
 }

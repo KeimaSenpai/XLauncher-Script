@@ -29,14 +29,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: v1.0.3
-        release_name: XLauncher v1.0.3
+        tag_name: v1.0.4
+        release_name: XLauncher v1.0.4
         body: |
           ## 🚀 Funciones
           - Agregado indicador de por donde va la descarga.
           - Agregada la opcion de instalar Fabric.
           - Agregado las opcion de Ajustes.
-          - Editar Nombre ruta del Java y RAM.
+          - Editar Nombre ruta del Java RAM y Versión.
           ------
           ## 📑Próximamente
           -  Login con cuenta Premium

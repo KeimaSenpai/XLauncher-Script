@@ -41,14 +41,17 @@ async def install_minecraft():
 
 # Instalar Forge
 async def install_forge():
-    print('Dime la Versión')
-    forge_ver = input('» ')
-    forge = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
-    print(forge)
-    minecraft_launcher_lib.forge.install_forge_version(forge, minecraft_directory, callback=callback) # type: ignore
-    print("◈ Forge Instalado... ◈")
-    time.sleep(2)
-    await play_mine()
+    try:
+        print('Dime la Versión')
+        forge_ver = input('» ')
+        forge = minecraft_launcher_lib.forge.find_forge_version(forge_ver)
+        print(forge)
+        minecraft_launcher_lib.forge.install_forge_version(forge, minecraft_directory, callback=callback) # type: ignore
+        print("◈ Forge Instalado... ◈")
+        time.sleep(2)
+        await play_mine()
+    except:
+        print(KeyError)
 
 async def install_fabric():
     print('Dime la versión')

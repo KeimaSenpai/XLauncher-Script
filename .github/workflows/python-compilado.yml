@@ -1,5 +1,5 @@
 name: Build and Release
-
+ 
 on:
   workflow_dispatch:
 
@@ -29,8 +29,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: v1.0.4
-        release_name: XLauncher v1.0.4
+        tag_name: v1.0.5
+        release_name: XLauncher v1.0.5
         body: |
           ## 🚀 Funciones
           - Agregado indicador de por donde va la descarga.
@@ -44,7 +44,7 @@ jobs:
           ------
           ## 🐛Se corrigieron los siguientes bugs
           
-          - [ ]  'UseConcMarkSweepGC'
+          - [ ]  El problema de cambiar los ajustes del launcher
           
           ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KeimaSenpai/XLauncher-Script/total?style=for-the-badge&label=Download&color=%23756AB6)
         draft: false
@@ -56,6 +56,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./XLauncher-Windows.zip
-        asset_name: XLauncher-Windows.zip
+        asset_path: .dist/*.zip
+        asset_name: *.zip
         asset_content_type: application/zip

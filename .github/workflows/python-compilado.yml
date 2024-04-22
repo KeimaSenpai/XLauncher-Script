@@ -1,5 +1,5 @@
 name: Build and Release
- 
+
 on:
   workflow_dispatch:
 
@@ -56,6 +56,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: .//dist//*.zip
+        asset_path: ./XLauncher-Windows.zip
         asset_name: XLauncher-Windows.zip
         asset_content_type: application/zip

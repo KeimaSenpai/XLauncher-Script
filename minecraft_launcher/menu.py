@@ -8,7 +8,7 @@ import minecraft_launcher_lib
 from .minecraft import install_fabric, install_forge, install_minecraft, play_mine
 
 
-VERSION = ('1.0.4')
+VERSION = ('1.0.5')
 user_windows = os.environ['USERNAME']
 minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
 ruta_json = f"{minecraft_directory}//configuration.json"
@@ -109,12 +109,7 @@ async def cambiar_dato():
         print(f"◈ Actualizando... ◈")
         time.sleep(2)
         await menu_I()
-    else:
-        print("Opción no válida. Por favor elija entre Nombre, RAM, Version o Java.")
-        await cambiar_dato()
-
-
-    if option in data:
+    elif option in data:
         print(f'▐Ingrese el nuevo valor para {option}')
         nuevo_valor = input('» ')
         data[option] = nuevo_valor
@@ -128,6 +123,22 @@ async def cambiar_dato():
     else:
         print("Opción no válida. Por favor elija entre Nombre, RAM, Version o Java.")
         await cambiar_dato()
+
+
+    # if option in data:
+    #     print(f'▐Ingrese el nuevo valor para {option}')
+    #     nuevo_valor = input('» ')
+    #     data[option] = nuevo_valor
+
+    #     with open(ruta_json, 'w') as file:
+    #         json.dump(data, file)
+
+    #     print(f"◈ Actualizando... ◈")
+    #     time.sleep(2)
+    #     await menu_I()
+    # else:
+    #     print("Opción no válida. Por favor elija entre Nombre, RAM, Version o Java.")
+    #     await cambiar_dato()
 
 
 # -----------------------------------------------------
